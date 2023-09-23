@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Eduardo Krutzsch
+      changes:
+        - sqlFile:
+            path: migration/v1.sql
+            relativeToChangelogFile: true

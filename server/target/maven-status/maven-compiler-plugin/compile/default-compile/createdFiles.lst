@@ -1,0 +1,14 @@
+tcc/job/devs/resources/BaseResource.class
+tcc/job/devs/entities/UserEntity.class
+tcc/job/devs/payload/UserPayloads$UpdateUserPayload.class
+tcc/job/devs/SecurityConfiguration.class
+tcc/job/devs/payload/UserPayloads.class
+tcc/job/devs/payload/LoginPayload.class
+tcc/job/devs/payload/UserPayloads$UserPayload.class
+tcc/job/devs/payload/UserPayloads$UserModel.class
+tcc/job/devs/Application.class
+tcc/job/devs/resources/UserResource.class
+tcc/job/devs/repository/UserRepository.class
+tcc/job/devs/entities/EntityBase.class
+tcc/job/devs/repository/BaseRepository.class
+tcc/job/devs/payload/UserPayloads$CreateUserPayload.class
