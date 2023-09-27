@@ -1,4 +1,4 @@
-package tcc.job.devs.repository;
+package tcc.job.devs.repositories;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.NoRepositoryBean;

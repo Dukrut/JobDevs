@@ -1,13 +1,13 @@
 package tcc.job.devs.entities;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@Entity
+@MappedSuperclass
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Data
 public class EntityBase {
