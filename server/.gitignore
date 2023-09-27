@@ -1,0 +1,64 @@
+# Arquivos compilados Java
+*.class
+
+# Arquivos de pacote
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Arquivos criados pelo diretório /target do Maven
+target/
+
+# Arquivos criados pelo diretório /build do Gradle
+build/
+
+# Arquivos criados pelo diretório /out do IntelliJ
+out/
+
+# Arquivos de log
+*.log
+
+# Diretórios de binário
+bin/
+
+# Arquivos temporários
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDEs e editores
+# IntelliJ
+.idea/
+*.iml
+*.iws
+
+# Eclipse
+*.project
+*.classpath
+*.settings/
+
+# VS Code
+.vscode/
+
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Outras ferramentas
+*.hprof
+*.releaseBackup
+
+# Arquivos específicos do Spring Boot
+spring-boot-devtools/
