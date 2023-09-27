@@ -1,4 +1,4 @@
-package tcc.job.devs.payload;
+package tcc.job.devs.payloads;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

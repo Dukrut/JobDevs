@@ -1,4 +1,4 @@
-package tcc.job.devs.payload;
+package tcc.job.devs.payloads;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -15,19 +15,21 @@ public class UserPayloads {
         @NotBlank
         @Email
         private String email;
+    }
+
+    @EqualsAndHashCode(callSuper = true)
+    @Data
+    public static class CreateUserPayload extends UserPayload {
         @NotBlank
         private String password;
     }
 
     @EqualsAndHashCode(callSuper = true)
     @Data
-    public static class CreateUserPayload extends UserPayload {
-    }
-
-    @EqualsAndHashCode(callSuper = true)
-    @Data
     public static class UpdateUserPayload extends UserPayload {
         private int id;
+        @NotBlank
+        private String password;
     }
 
     @EqualsAndHashCode(callSuper = true)

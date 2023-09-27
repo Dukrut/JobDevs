@@ -10,7 +10,7 @@ CREATE TABLE `user` (
   `password` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `user_UN` (`email`)
+  UNIQUE KEY `email_UN` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `education` (
