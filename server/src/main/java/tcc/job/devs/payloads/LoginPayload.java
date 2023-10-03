@@ -9,7 +9,7 @@ public class LoginPayload {
 
     @NotBlank
     @Email
-    private String mail;
+    private String email;
 
     @NotBlank
     private String password;

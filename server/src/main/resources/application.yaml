@@ -1,4 +1,9 @@
 spring:
+  main:
+    allow-circular-references: true
+  devtools:
+    livereload:
+      enabled: true
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/jobdev

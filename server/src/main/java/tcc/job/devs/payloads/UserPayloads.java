@@ -1,5 +1,6 @@
 package tcc.job.devs.payloads;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
@@ -36,6 +37,8 @@ public class UserPayloads {
     @Data
     public static class UserModel extends UserPayload {
         private int id;
+        @JsonIgnore
+        private String password;
     }
 
 }
