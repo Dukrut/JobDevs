@@ -32,7 +32,6 @@ public class UserPayloads {
     public static class UpdateUserPayload extends UserPayload {
         @EqualsAndHashCode.Include
         private int id;
-        @NotBlank
         private String password;
     }
 

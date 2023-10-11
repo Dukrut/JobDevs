@@ -6,11 +6,13 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = true)
-@Table(name = "user")
+@Table(name = "users")
 @Entity
 @Data
+@ToString(callSuper = true)
 public class UserEntity extends EntityBase {
 
     @NotBlank

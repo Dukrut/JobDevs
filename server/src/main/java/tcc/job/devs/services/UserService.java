@@ -19,13 +19,14 @@ public class UserService {
     @Autowired
     private PasswordEncoder encoder;
 
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    public UserPayloads.UserModel findById(int id) {
+    public UserPayloads.UserModel findModelById(int id) {
         return userRepository.findById(id).map(UserMapper.INSTANCE::toModel).orElseThrow();
     }
+
+    public UserEntity findEntityById(int id) {
+        return userRepository.findById(id).orElseThrow();
+    }
+
 
     public UserPayloads.UserModel create(UserPayloads.CreateUserPayload createUserPayload) {
         createUserPayload.setPassword(handlePassword(createUserPayload.getPassword()));

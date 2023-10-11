@@ -6,22 +6,22 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tcc.job.devs.payloads.UserPayloads;
-import tcc.job.devs.services.UserService;
+import tcc.job.devs.payloads.ProfilePayloads;
+import tcc.job.devs.services.ProfileService;
 
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping(value = "/api/v1/users")
-public class UserResource implements BaseResource<UserPayloads.UserModel, UserPayloads.CreateUserPayload, UserPayloads.UpdateUserPayload> {
+@RequestMapping(value = "/api/v1/user/profile")
+public class ProfileResource implements BaseResource<ProfilePayloads.ProfileModel, ProfilePayloads.CreateProfilePayload, ProfilePayloads.UpdateProfilePayload> {
 
     @Autowired
-    private UserService userService;
+    private ProfileService profileService;
 
     @Override
     public ResponseEntity<?> get(int id) {
         try {
-            UserPayloads.UserModel user = userService.findModelById(id);
+            ProfilePayloads.ProfileModel user = profileService.findByUserId(id);
             return response(user, HttpStatus.OK);
         } catch (NoSuchElementException ex) {
             return response(HttpStatus.NOT_FOUND);
@@ -31,22 +31,26 @@ public class UserResource implements BaseResource<UserPayloads.UserModel, UserPa
     }
 
     @Override
-    public ResponseEntity<?> create(UserPayloads.CreateUserPayload createUserPayload) {
+    public ResponseEntity<?> create(ProfilePayloads.CreateProfilePayload createProfilePayload) {
         try {
-            UserPayloads.UserModel model = userService.create(createUserPayload);
+            ProfilePayloads.ProfileModel model = profileService.create(createProfilePayload);
             return response(model, HttpStatus.OK);
         } catch (DataIntegrityViolationException ex) {
             return response(getDuplicatedFieldFromException(ex), HttpStatus.CONFLICT);
+        } catch (NoSuchElementException ex) {
+            return response(HttpStatus.NOT_FOUND);
         } catch (Exception ex) {
             return response(HttpStatus.BAD_REQUEST);
         }
     }
 
     @Override
-    public ResponseEntity<?> update(UserPayloads.UpdateUserPayload updateUserPayload) {
+    public ResponseEntity<?> update(ProfilePayloads.UpdateProfilePayload updateProfilePayload) {
         try {
-            UserPayloads.UserModel model = userService.update(updateUserPayload);
+            ProfilePayloads.ProfileModel model = profileService.update(updateProfilePayload);
             return response(model, HttpStatus.OK);
+        } catch (DataIntegrityViolationException ex) {
+            return response(getDuplicatedFieldFromException(ex), HttpStatus.CONFLICT);
         } catch (NoSuchElementException ex) {
             return response(HttpStatus.NOT_FOUND);
         } catch (Exception ex) {
@@ -56,12 +60,6 @@ public class UserResource implements BaseResource<UserPayloads.UserModel, UserPa
 
     @Override
     public ResponseEntity<Void> delete(int id) {
-        try {
-            userService.deleteById(id);
-            return response(HttpStatus.OK);
-        } catch (Exception ex) {
-            return response(HttpStatus.BAD_REQUEST);
-        }
-
+        return response(HttpStatus.NOT_IMPLEMENTED);
     }
 }

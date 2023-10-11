@@ -1,5 +1,6 @@
 package tcc.job.devs.resources;
 
+import jakarta.validation.Valid;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +14,10 @@ public interface BaseResource<TModel, TCreatePayload, TUpdatePayload> extends IR
     ResponseEntity<?> get(@PathVariable(name = "id", required = true) int id);
 
     @PostMapping
-    ResponseEntity<?> create(@RequestBody(required = true) TCreatePayload payload);
+    ResponseEntity<?> create(@Valid @RequestBody(required = true) TCreatePayload payload);
 
     @PutMapping
-    ResponseEntity<?> update(@RequestBody(required = true) TUpdatePayload payload);
+    ResponseEntity<?> update(@Valid @RequestBody(required = true) TUpdatePayload payload);
 
     @DeleteMapping("/{id}")
     ResponseEntity<Void> delete(@PathVariable(name = "id", required = true) int id);
