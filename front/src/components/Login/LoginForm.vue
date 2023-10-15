@@ -31,6 +31,11 @@
 <script setup>
 import { ref } from 'vue';
 import login from '../../services/authService';
+import { useQuasar } from 'quasar';
+import { useAuthStore } from '../../stores/auth-store';
+
+const $q = useQuasar();
+const authStore = useAuthStore();
 
 const form = ref({
   email: null,
@@ -43,10 +48,16 @@ const onSubmit = () => {
   if (validateForm()) {
     login(form.value)
       .then((response) => {
-        console.log("response", response);
+        if (response.data.info) {
+          authStore.setJWt(response.data.info);
+        }
       })
       .catch((error) => {
-        console.log("error", error);
+        $q.notify({
+          icon: 'warning',
+          color: 'negative',
+          message: 'Credenciais inválidas!'
+        })
       })
   }
 }
