@@ -12,7 +12,7 @@ import tcc.job.devs.services.ProfileService;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping(value = "/api/v1/user/profile")
+@RequestMapping(value = "/api/user/profile")
 public class ProfileResource implements BaseResource<ProfilePayloads.ProfileModel, ProfilePayloads.CreateProfilePayload, ProfilePayloads.UpdateProfilePayload> {
 
     @Autowired

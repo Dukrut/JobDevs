@@ -18,7 +18,7 @@ import tcc.job.devs.security.JwtUtils;
 import tcc.job.devs.utils.Slf4jLoggerService;
 
 @RestController
-@RequestMapping(value = "/api/v1/auth")
+@RequestMapping(value = "/api/auth")
 public class AuthResource implements IResponseResource {
 
     private final Logger logger = LoggerFactory.getLogger(Slf4jLoggerService.class);

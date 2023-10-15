@@ -12,7 +12,7 @@ import tcc.job.devs.services.UserService;
 import java.util.NoSuchElementException;
 
 @RestController
-@RequestMapping(value = "/api/v1/users")
+@RequestMapping(value = "/api/users")
 public class UserResource implements BaseResource<UserPayloads.UserModel, UserPayloads.CreateUserPayload, UserPayloads.UpdateUserPayload> {
 
     @Autowired
