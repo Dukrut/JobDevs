@@ -25,9 +25,6 @@ public class AuthResource implements IResponseResource {
     private UserService userService;
 
     @Autowired
-    private SecurityContextHolder securityContextHolder;
-
-    @Autowired
     private JwtUtils jwt;
 
     @PostMapping("/login")
