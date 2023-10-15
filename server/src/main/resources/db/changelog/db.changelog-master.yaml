@@ -6,3 +6,6 @@ databaseChangeLog:
         - sqlFile:
             path: migration/v1.sql
             relativeToChangelogFile: true
+        - sqlFile:
+            path: migration/v1__users_default.sql
+            relativeToChangelogFile: true
