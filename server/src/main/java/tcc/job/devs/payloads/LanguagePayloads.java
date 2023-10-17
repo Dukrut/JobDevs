@@ -26,7 +26,7 @@ public class LanguagePayloads {
         @EqualsAndHashCode.Include
         private int id;
         private Proficiency proficiency;
-        private LanguagePayload language;
+        private int languageId;
 
     }
 }
