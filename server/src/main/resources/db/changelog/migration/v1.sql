@@ -48,8 +48,8 @@ CREATE TABLE IF NOT EXISTS `profiles` (
   `last_role` varchar(255) DEFAULT NULL,
   `last_company` varchar(255) DEFAULT NULL,
   `student` tinyint(4) DEFAULT 0,
-  `job_preference` enum('home office','hybrid','presential') NOT NULL,
-  `contract_preference` enum('freelance','clt','pj') DEFAULT NULL,
+  `job_preference` enum('HOME_OFFICE','HYBRID','PRESENTIAL') NOT NULL,
+  `contract_preference` enum('FREELANCE','CLT','PJ') DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `profile_FK` (`user_id`),
@@ -59,6 +59,7 @@ CREATE TABLE IF NOT EXISTS `profiles` (
 CREATE TABLE IF NOT EXISTS `skills` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
+  `experience_time` ENUM('LESS_THAN_1_YEAR', 'ONE_YEAR', 'TWO_YEARS', 'THREE_YEARS', 'FOUR_YEARS', 'FIVE_YEARS', 'MORE_THAN_FIVE_YEARS') NOT NULL,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_has_skill_FK` (`user_id`),

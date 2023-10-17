@@ -25,16 +25,13 @@ public class ProfileService {
         UserEntity user = userService.findEntityById(createProfilePayload.getUserId());
         ProfileEntity profile = ProfileMapper.INSTANCE.toEntity(createProfilePayload);
         profile.setUser(user);
-        System.out.println("profile="+ profile);
         profileRepository.save(profile);
         return ProfileMapper.INSTANCE.toModel(profile);
     }
 
     public ProfilePayloads.ProfileModel update(ProfilePayloads.UpdateProfilePayload updateProfilePayload) {
         ProfileEntity profile = profileRepository.findById(updateProfilePayload.getId()).orElseThrow();
-        System.out.println(profile);
         ProfileMapper.INSTANCE.updateEntityFromPayload(updateProfilePayload, profile);
-        System.out.println(profile);
         profileRepository.save(profile);
         return ProfileMapper.INSTANCE.toModel(profile);
     }

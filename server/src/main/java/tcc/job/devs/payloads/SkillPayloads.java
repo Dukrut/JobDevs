@@ -12,8 +12,10 @@ public class SkillPayloads {
     @Data
     private static class SkillPayload {
         @NotBlank
+        @EqualsAndHashCode.Include
         private String name;
         @NotBlank
+        @EqualsAndHashCode.Include
         private ExperienceTime experienceTime;
     }
 
