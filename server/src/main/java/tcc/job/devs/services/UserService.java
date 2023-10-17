@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import tcc.job.devs.entities.UserEntity;
 import tcc.job.devs.mappers.UserMapper;
 import tcc.job.devs.payloads.UserPayloads;
-import tcc.job.devs.repositories.UserRepository;
+import tcc.job.devs.repositories.UserRepositoryImpl;
 
 import java.util.Objects;
 
@@ -14,7 +14,7 @@ import java.util.Objects;
 public class UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserRepositoryImpl userRepository;
 
     @Autowired
     private PasswordEncoder encoder;

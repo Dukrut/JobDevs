@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `user_has_languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  `proficiency` enum('1','2','3') DEFAULT NULL,
+  `proficiency` enum('BEGINNER','INTERMEDIARY','ADVANCED') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_has_language_FK` (`user_id`),
   KEY `user_has_language_FK_1` (`language_id`),

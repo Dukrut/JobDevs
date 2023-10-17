@@ -6,13 +6,13 @@ import tcc.job.devs.entities.ProfileEntity;
 import tcc.job.devs.entities.UserEntity;
 import tcc.job.devs.mappers.ProfileMapper;
 import tcc.job.devs.payloads.ProfilePayloads;
-import tcc.job.devs.repositories.ProfileRepository;
+import tcc.job.devs.repositories.ProfileRepositoryImpl;
 
 @Service
 public class ProfileService {
 
     @Autowired
-    private ProfileRepository profileRepository;
+    private ProfileRepositoryImpl profileRepository;
 
     @Autowired
     private UserService userService;

@@ -13,7 +13,7 @@ import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/api/user/{user_id}/skill")
-public class SkillResource implements IResponseResource {
+public class SkillResourceImpl implements IResponseResource {
 
 
     @Autowired

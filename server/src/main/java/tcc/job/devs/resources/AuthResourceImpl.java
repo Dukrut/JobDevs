@@ -15,7 +15,7 @@ import tcc.job.devs.services.UserService;
 
 @RestController
 @RequestMapping(value = "/api/auth")
-public class AuthResource implements IResponseResource {
+public class AuthResourceImpl implements IResponseResource {
 
     @Autowired
     private AuthenticationManager authenticationManager;

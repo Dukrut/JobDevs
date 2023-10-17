@@ -4,7 +4,7 @@ import tcc.job.devs.entities.UserEntity;
 
 import java.util.Optional;
 
-public interface UserRepository extends BaseRepository<UserEntity> {
+public interface UserRepositoryImpl extends BaseRepository<UserEntity> {
 
     Optional<UserEntity> findByEmail(String email);
 

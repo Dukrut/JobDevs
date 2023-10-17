@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import tcc.job.devs.entities.UserEntity;
 import tcc.job.devs.mappers.SkillMapper;
 import tcc.job.devs.payloads.SkillPayloads;
-import tcc.job.devs.repositories.SkillRepository;
+import tcc.job.devs.repositories.SkillRepositoryImpl;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class SkillService {
 
     @Autowired
-    private SkillRepository skillRepository;
+    private SkillRepositoryImpl skillRepository;
 
     @Autowired
     private UserService userService;

@@ -6,7 +6,7 @@ import tcc.job.devs.entities.SkillEntity;
 
 import java.util.Set;
 
-public interface SkillRepository extends BaseRepository<SkillEntity> {
+public interface SkillRepositoryImpl extends BaseRepository<SkillEntity> {
 
     Set<SkillEntity> findByUserId(int userId);
 

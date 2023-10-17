@@ -4,7 +4,7 @@ import tcc.job.devs.entities.ProfileEntity;
 
 import java.util.Optional;
 
-public interface ProfileRepository extends BaseRepository<ProfileEntity> {
+public interface ProfileRepositoryImpl extends BaseRepository<ProfileEntity> {
 
     Optional<ProfileEntity> findByUserId(int userId);
 
