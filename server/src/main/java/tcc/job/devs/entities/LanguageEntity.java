@@ -5,11 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "language")
 @Entity
 @Data
+@ToString(callSuper = true)
 public class LanguageEntity extends EntityBase {
 
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")

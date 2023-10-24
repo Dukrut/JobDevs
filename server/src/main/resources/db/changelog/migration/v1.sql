@@ -66,14 +66,24 @@ CREATE TABLE IF NOT EXISTS `skills` (
   CONSTRAINT `user_has_skill_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE IF NOT EXISTS `user_has_languages` (
+CREATE TABLE IF NOT EXISTS `user_languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `english_proficiency` enum('BEGINNER','INTERMEDIARY','ADVANCED') DEFAULT NULL,
+  `worked_with_english` TINYINT(1) DEFAULT 0,
   `user_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL,
-  `proficiency` enum('BEGINNER','INTERMEDIARY','ADVANCED') DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_has_language_FK` (`user_id`),
-  KEY `user_has_language_FK_1` (`language_id`),
-  CONSTRAINT `user_has_language_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `user_has_language_FK_1` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE
+  CONSTRAINT `user_has_language_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE IF NOT EXISTS `user_languages_has_skills` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `proficiency` enum('BEGINNER','INTERMEDIARY','ADVANCED') DEFAULT NULL,
+  `language_id` int(11) NOT NULL,
+  `user_language_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_has_language_skills_FK` (`user_language_id`),
+  KEY `user_has_language_skills_FK_1` (`language_id`),
+  CONSTRAINT `user_has_language_skills_FK` FOREIGN KEY (`user_language_id`) REFERENCES `user_languages` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `user_has_language_skills_FK_1` FOREIGN KEY (`language_id`) REFERENCES `language` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

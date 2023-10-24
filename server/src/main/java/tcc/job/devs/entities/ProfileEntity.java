@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import tcc.job.devs.enums.ContractPreference;
 import tcc.job.devs.enums.Gender;
 import tcc.job.devs.enums.JobPreference;
@@ -12,6 +13,7 @@ import tcc.job.devs.enums.JobPreference;
 @Table(name = "profiles")
 @Entity
 @Data
+@ToString(callSuper = true)
 public class ProfileEntity extends EntityBase {
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")

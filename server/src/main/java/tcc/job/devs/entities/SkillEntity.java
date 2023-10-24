@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import tcc.job.devs.enums.ExperienceTime;
 
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "skills")
 @Entity
 @Data
+@ToString(callSuper = true)
 public class SkillEntity extends EntityBase {
 
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")

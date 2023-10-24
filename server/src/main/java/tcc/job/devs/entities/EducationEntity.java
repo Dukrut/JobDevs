@@ -3,6 +3,7 @@ package tcc.job.devs.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.Date;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 @Table(name = "educations")
 @Entity
 @Data
+@ToString(callSuper = true)
 public class EducationEntity extends EntityBase {
 
     @Column(name = "institution_name", nullable = false, length = 255)
