@@ -18,11 +18,14 @@ public class UserLanguagePayloads {
         private Set<UserLanguageSkillPayload> languageSkills = new HashSet<>();
     }
 
-    @EqualsAndHashCode
+    @EqualsAndHashCode(onlyExplicitlyIncluded = true)
     @ToString(callSuper = true)
     @Data
     public static class UserLanguageSkillPayload {
+        @EqualsAndHashCode.Include
+        private int id;
         private Proficiency proficiency;
+        @EqualsAndHashCode.Include
         private int languageId;
     }
 

@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `user_languages` (
   `worked_with_english` TINYINT(1) DEFAULT 0,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id_UN` (`user_id`),
   KEY `user_has_language_FK` (`user_id`),
   CONSTRAINT `user_has_language_FK` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

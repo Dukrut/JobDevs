@@ -9,13 +9,14 @@ import tcc.job.devs.entities.UserLanguageSkillEntity;
 import tcc.job.devs.payloads.UserLanguagePayloads;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface UserLanguageMapper {
 
     UserLanguageMapper INSTANCE = Mappers.getMapper(UserLanguageMapper.class);
 
-    @Mapping(target = "languageSkills.languageId", expression = "java(mapLanguageId(entity.getLanguageSkills()))")
+    @Mapping(target = "languageSkills", expression = "java(mapLanguageSkills(entity.getLanguageSkills()))")
     UserLanguagePayloads.UserLanguageModel toModel(UserLanguageEntity entity);
 
     @Mapping(target = "languageSkills", ignore = true)
@@ -31,11 +32,14 @@ public interface UserLanguageMapper {
 
     void updateModelFromEntity(UserLanguageEntity entity, @MappingTarget UserLanguagePayloads.UserLanguageModel model);
 
-    default int mapLanguageId(Set<UserLanguageSkillEntity> languageSkills) {
+    @Mapping(target = "languageId", source = "language.id")
+    UserLanguagePayloads.UserLanguageSkillPayload toPayload(UserLanguageSkillEntity entity);
+
+    default Set<UserLanguagePayloads.UserLanguageSkillPayload> mapLanguageSkills(Set<UserLanguageSkillEntity> languageSkills) {
         return languageSkills.stream()
-                .findFirst()
-                .map(userLanguageSkillEntity -> userLanguageSkillEntity.getLanguage().getId())
-                .orElse(0);  // ou outro valor padrão ou exceção
+                .map(this::toPayload)
+                .collect(Collectors.toSet());
     }
+
 
 }

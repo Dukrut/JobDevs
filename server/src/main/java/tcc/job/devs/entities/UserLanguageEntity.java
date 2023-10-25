@@ -27,6 +27,6 @@ public class UserLanguageEntity extends EntityBase {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany(mappedBy = "userLanguage", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "userLanguage", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<UserLanguageSkillEntity> languageSkills = new HashSet<>();
 }

@@ -1,5 +1,6 @@
 package tcc.job.devs.services;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tcc.job.devs.entities.LanguageEntity;
@@ -34,8 +35,27 @@ public class UserLanguageService {
             userLanguageSkillEntity.setLanguage(languageEntity);
             userLanguageEntity.getLanguageSkills().add(userLanguageSkillEntity);
         }
-        System.out.println(userLanguageEntity);
         return UserLanguageMapper.INSTANCE.toModel(userLanguageRepository.save(userLanguageEntity));
 
+    }
+
+    @Transactional
+    public UserLanguagePayloads.UserLanguageModel update(UserLanguagePayloads.UpdateUserLanguagePayload updateUserLanguagePayload) {
+        UserLanguageEntity userLanguageEntity = userLanguageRepository.findById(updateUserLanguagePayload.getId()).orElseThrow();
+        userLanguageRepository.clearLanguageSkillsByLanguageId(userLanguageEntity.getId());
+        userLanguageEntity.getLanguageSkills().clear();
+        for (UserLanguagePayloads.UserLanguageSkillPayload userLanguageSkillPayload : updateUserLanguagePayload.getLanguageSkills()) {
+            UserLanguageSkillEntity userLanguageSkillEntity = new UserLanguageSkillEntity();
+            userLanguageSkillEntity.setProficiency(userLanguageSkillPayload.getProficiency());
+            userLanguageSkillEntity.setUserLanguage(userLanguageEntity);
+            LanguageEntity languageEntity = languageService.getEntityById(userLanguageSkillPayload.getLanguageId());
+            userLanguageSkillEntity.setLanguage(languageEntity);
+            userLanguageEntity.getLanguageSkills().add(userLanguageSkillEntity);
+        }
+        return UserLanguageMapper.INSTANCE.toModel(userLanguageRepository.save(userLanguageEntity));
+    }
+
+    public UserLanguagePayloads.UserLanguageModel getByUserId(int userId) {
+        return UserLanguageMapper.INSTANCE.toModel(userLanguageRepository.findByUserId(userId).orElseThrow());
     }
 }

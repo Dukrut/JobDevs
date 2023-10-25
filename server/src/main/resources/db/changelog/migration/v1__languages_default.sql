@@ -1,0 +1,1 @@
+INSERT INTO jobdev.`language` (id, name) VALUES(1, "PT-BR"), (2, "EN"), (4, "FR"), (3, "ES"), (5, "AL"), (6, "FR"), (7, "IT");
