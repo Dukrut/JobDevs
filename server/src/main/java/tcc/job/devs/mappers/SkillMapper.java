@@ -10,7 +10,7 @@ public interface SkillMapper {
 
     SkillMapper INSTANCE = Mappers.getMapper(SkillMapper.class);
 
-    @Mapping(target = "userId", source = "entity.user.id")
+    @Mapping(target = "userId", ignore = true)
     SkillPayloads.SkillModel toModel(SkillEntity entity);
 
     SkillEntity toEntity(SkillPayloads.CreateSkillPayload createProfilePayload);

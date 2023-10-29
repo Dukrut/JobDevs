@@ -1,12 +1,14 @@
 package tcc.job.devs.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(callSuper = true)
 @Table(name = "users")
@@ -24,5 +26,17 @@ public class UserEntity extends EntityBase {
 
     @NotBlank
     private String password;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private UserLanguageEntity language;
+
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    private ProfileEntity profile;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<EducationEntity> educations = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private Set<SkillEntity> skills = new HashSet<>();
 
 }

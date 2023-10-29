@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import tcc.job.devs.enums.ExperienceTime;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Table(name = "skills")
 @Entity
 @Data
@@ -21,7 +21,7 @@ public class SkillEntity extends EntityBase {
     @Column(name = "experience_time")
     private ExperienceTime experienceTime;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
     @NotNull
     private UserEntity user;

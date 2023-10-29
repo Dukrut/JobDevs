@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class UserPayloads {
 
     @Data
@@ -43,6 +46,10 @@ public class UserPayloads {
         private int id;
         @JsonIgnore
         private String password;
+        private UserLanguagePayloads.UserLanguageModel language;
+        private ProfilePayloads.ProfileModel profile;
+        private Set<SkillPayloads.SkillModel> skills = new HashSet<>();
+        private Set<EducationPayloads.EducationModel> educations = new HashSet<>();
     }
 
 }

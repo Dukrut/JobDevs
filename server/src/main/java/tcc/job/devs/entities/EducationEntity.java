@@ -7,7 +7,7 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Table(name = "educations")
 @Entity
 @Data
@@ -40,7 +40,7 @@ public class EducationEntity extends EntityBase {
     @Column(name = "activities", nullable = false, length = 255)
     private String activities;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 }

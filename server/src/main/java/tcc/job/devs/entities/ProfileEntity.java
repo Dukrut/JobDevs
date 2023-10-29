@@ -9,7 +9,7 @@ import tcc.job.devs.enums.ContractPreference;
 import tcc.job.devs.enums.Gender;
 import tcc.job.devs.enums.JobPreference;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Table(name = "profiles")
 @Entity
 @Data
@@ -43,7 +43,7 @@ public class ProfileEntity extends EntityBase {
     @Column(name = "contract_preference")
     private ContractPreference contractPreference;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
     @NotNull
     private UserEntity user;

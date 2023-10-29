@@ -8,6 +8,7 @@ import java.util.Set;
 
 public interface SkillRepositoryImpl extends BaseRepository<SkillEntity> {
 
+    @Query("SELECT s FROM SkillEntity s JOIN s.user u WHERE u.id = ?1")
     Set<SkillEntity> findByUserId(int userId);
 
     @Modifying

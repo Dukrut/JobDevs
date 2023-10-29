@@ -10,7 +10,7 @@ public interface ProfileMapper {
 
     ProfileMapper INSTANCE = Mappers.getMapper(ProfileMapper.class);
 
-    @Mapping(target = "userId", source = "entity.user.id")
+    @Mapping(target = "userId", ignore = true)
     ProfilePayloads.ProfileModel toModel(ProfileEntity entity);
 
     ProfileEntity toEntity(ProfilePayloads.CreateProfilePayload createProfilePayload);

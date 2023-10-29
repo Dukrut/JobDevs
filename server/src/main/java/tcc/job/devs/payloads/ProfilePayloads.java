@@ -1,5 +1,6 @@
 package tcc.job.devs.payloads;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -49,6 +50,7 @@ public class ProfilePayloads {
         @EqualsAndHashCode.Include
         private Integer id;
         @NotNull
+        @JsonBackReference
         private int userId;
     }
 

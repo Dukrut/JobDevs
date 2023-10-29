@@ -26,10 +26,13 @@ public class SkillService {
 
     @Transactional
     public Set<SkillPayloads.SkillModel> create(Set<SkillPayloads.CreateSkillPayload> createSkillPayloads, int userId) {
+
+        System.out.println(createSkillPayloads);
         UserEntity user = userService.findEntityById(userId);
         for (SkillPayloads.CreateSkillPayload skillPayload : createSkillPayloads) {
             skillRepository.save(skillPayload.getName(), skillPayload.getExperienceTime().toString(), user.getId());
         }
+        System.out.println("?????");
         return skillRepository.findByUserId(userId)
                 .stream().map(SkillMapper.INSTANCE::toModel).collect(Collectors.toSet());
     }

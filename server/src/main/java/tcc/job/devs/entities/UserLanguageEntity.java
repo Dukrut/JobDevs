@@ -9,7 +9,7 @@ import tcc.job.devs.enums.Proficiency;
 import java.util.HashSet;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
 @Table(name = "user_languages")
 @Entity
 @Data
