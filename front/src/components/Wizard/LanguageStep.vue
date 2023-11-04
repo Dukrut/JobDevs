@@ -3,7 +3,7 @@
     style="display: flex; justify-content: center; width: 100%; height: 100%; flex-direction: column; gap: 3rem;">
     <div>
       <label for="english-level">Qual o seu nível de inglês?</label>
-      <q-select dense outlined id="english-level" clearable v-model="userStore.language.englishProficiency"
+      <q-select dense outlined id="english-level" clearable v-model="userStore.info.language.englishProficiency"
         :options="proficiencyOptions" option-label="name" emit-value map-options style="width: 40%; padding-top: 15px;"
         label="Selecione uma opção" />
     </div>
@@ -12,9 +12,9 @@
       <label for="working-english">Você trabalha ou já trabalhou exclusivamente utilizando inglês?</label>
 
       <div>
-        <q-radio id="working-english" v-model="userStore.language.workedWithEnglish" checked-icon="task_alt"
+        <q-radio id="working-english" v-model="userStore.info.language.workedWithEnglish" checked-icon="task_alt"
           unchecked-icon="panorama_fish_eye" :val="true" label="Sim" />
-        <q-radio id="working-english" v-model="userStore.language.workedWithEnglish" checked-icon="task_alt"
+        <q-radio id="working-english" v-model="userStore.info.language.workedWithEnglish" checked-icon="task_alt"
           unchecked-icon="panorama_fish_eye" :val="false" label="Não" />
       </div>
     </div>
@@ -24,7 +24,7 @@
 
       <div style="max-height: 220px; overflow: auto;">
         <div class="list-languages-container" ref="listLanguagesRef">
-          <div style="display: flex; width: 100%;" v-for="(language, index) in userStore.language.languageSkills"
+          <div style="display: flex; width: 100%;" v-for="(language, index) in userStore.info.language.languageSkills"
             :key="index">
             <q-select dense outlined clearable v-model="language.languageId" :options="languagesOptions"
               label="Selecione uma opção" style="width: 40%; margin-right: 20px;" option-value="id" option-label="name"
@@ -76,7 +76,7 @@ const getLanguagesOptions = () => {
 }
 
 const addLine = () => {
-  userStore.language.languageSkills.push({ languageId: null, proficiency: null });
+  userStore.info.language.languageSkills.push({ languageId: null, proficiency: null });
 
   setTimeout(() => {
     listLanguagesRef.value.scrollTop = listLanguagesRef.value.scrollHeight;
@@ -84,7 +84,7 @@ const addLine = () => {
 }
 
 const removeLine = (index) => {
-  userStore.language.languageSkills.splice(index, 1);
+  userStore.info.language.languageSkills.splice(index, 1);
 }
 </script>
 

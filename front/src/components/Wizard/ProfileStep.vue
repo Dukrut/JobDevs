@@ -4,18 +4,19 @@
 
     <div>
       <label>Faça uma breve introdução sobre você.</label>
-      <q-input v-model="userStore.profile.description" outlined type="textarea" />
+      <q-input v-model="userStore.info.profile.description" outlined type="textarea" />
     </div>
 
     <div>
       <label for="english-level">Gênero</label>
-      <q-select dense outlined id="english-level" clearable v-model="userStore.profile.gender" :options="genderOptions"
-        option-label="name" emit-value map-options style="width: 40%;" label="Selecione uma opção" />
+      <q-select dense outlined id="english-level" clearable v-model="userStore.info.profile.gender"
+        :options="genderOptions" option-label="name" emit-value map-options style="width: 40%;"
+        label="Selecione uma opção" />
     </div>
 
     <div>
       <label>Nos conte um pouco sobre seus hobbies.</label>
-      <q-input v-model="userStore.profile.hobbies" outlined type="textarea" />
+      <q-input v-model="userStore.info.profile.hobbies" outlined type="textarea" />
     </div>
 
     <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -23,9 +24,9 @@
       <q-checkbox v-model="hasNotExperience" label="Não possuo experiência profissional" />
 
       <div v-if="!hasNotExperience" style="display: flex;">
-        <q-input outlined v-model="userStore.profile.lastRole" label="Adicione seu último cargo" clearable dense
+        <q-input outlined v-model="userStore.info.profile.lastRole" label="Adicione seu último cargo" clearable dense
           style="width: 40%;  margin-right: 20px;" />
-        <q-input outlined v-model="userStore.profile.lastCompany" label="Adicione o nome da empresa" clearable dense
+        <q-input outlined v-model="userStore.info.profile.lastCompany" label="Adicione o nome da empresa" clearable dense
           style="width: 40%;  margin-right: 20px;" />
       </div>
     </div>
@@ -33,18 +34,18 @@
     <div>
       <label>Qual a sua preferência de modelo de trabalho?</label>
       <div class="q-gutter-sm">
-        <q-checkbox v-model="userStore.profile.jobPreference" val="HOME_OFFICE" label="Home-office" />
-        <q-checkbox v-model="userStore.profile.jobPreference" val="HYBRID" label="Híbrido" />
-        <q-checkbox v-model="userStore.profile.jobPreference" val="PRESENTIAL" label="Presencial" />
+        <q-checkbox v-model="userStore.info.profile.jobPreference" val="HOME_OFFICE" label="Home-office" />
+        <q-checkbox v-model="userStore.info.profile.jobPreference" val="HYBRID" label="Híbrido" />
+        <q-checkbox v-model="userStore.info.profile.jobPreference" val="PRESENTIAL" label="Presencial" />
       </div>
     </div>
 
     <div>
       <label>Qual o tipo de contrato você prefere?</label>
       <div class="q-gutter-sm">
-        <q-checkbox v-model="userStore.profile.contractPreference" val="FREELANCE" label="Freelance" />
-        <q-checkbox v-model="userStore.profile.contractPreference" val="CLT" label="CLT" />
-        <q-checkbox v-model="userStore.profile.contractPreference" val="PJ" label="PJ" />
+        <q-checkbox v-model="userStore.info.profile.contractPreference" val="FREELANCE" label="Freelance" />
+        <q-checkbox v-model="userStore.info.profile.contractPreference" val="CLT" label="CLT" />
+        <q-checkbox v-model="userStore.info.profile.contractPreference" val="PJ" label="PJ" />
       </div>
     </div>
   </div>

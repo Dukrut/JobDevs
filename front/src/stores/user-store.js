@@ -2,44 +2,47 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
-    id: null,
-    email: null,
-    name: null,
-    skills: [
-      {
-        name: null,
-        experienceTime: null,
-      },
-    ],
-    language: {
-      workedWithEnglish: false,
-      englishProficiency: null,
-      languageSkills: [
+    info: {
+      id: null,
+      name: null,
+      email: null,
+      password: null,
+      skills: [
         {
-          proficiency: null,
-          languageId: null,
+          name: null,
+          experienceTime: null,
         },
       ],
-    },
-    educations: [
-      {
-        institutionName: null,
-        fieldStudy: null,
-        startDate: null,
-        endDate: null,
-        degree: null,
-        description: null,
-        activities: null,
+      language: {
+        workedWithEnglish: false,
+        englishProficiency: null,
+        languageSkills: [
+          {
+            languageId: null,
+            proficiency: null,
+          },
+        ],
       },
-    ],
-    profile: {
-      description: null,
-      gender: null,
-      hobbies: null,
-      lastRole: null,
-      lastCompany: null,
-      jobPreference: [],
-      contractPreference: [],
+      educations: [
+        {
+          institutionName: null,
+          fieldStudy: null,
+          startDate: null,
+          endDate: null,
+          degree: null,
+          description: null,
+          activities: null,
+        },
+      ],
+      profile: {
+        description: null,
+        gender: null,
+        hobbies: null,
+        lastRole: null,
+        lastCompany: null,
+        jobPreference: [],
+        contractPreference: [],
+      },
     },
   }),
 

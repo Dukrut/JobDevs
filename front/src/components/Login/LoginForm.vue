@@ -15,16 +15,9 @@
             </template>
           </q-input>
         </q-card-section>
-        <!--
+
         <q-card-section>
           <q-btn unelevated rounded color="primary" label="Entrar" type="submit" />
-        </q-card-section> -->
-
-
-        <q-card-section>
-          <router-link to="register/wizard">
-            Entrar
-          </router-link>
         </q-card-section>
       </q-form>
 

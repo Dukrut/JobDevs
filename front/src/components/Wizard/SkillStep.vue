@@ -7,7 +7,7 @@
 
       <div style="max-height: 220px; overflow: auto;">
         <div ref="listSkillsRef" class="list-skills-container">
-          <div v-for="(skill, index) in userStore.skills" :key="index" style="display: flex; width: 100%;">
+          <div v-for="(skill, index) in userStore.info.skills" :key="index" style="display: flex; width: 100%;">
             <q-input v-model="skill.name" outlined label="Adicione uma habilidade" clearable dense
               style="width: 40%;  margin-right: 20px;" />
 
@@ -43,7 +43,7 @@ const experienceTimeOptions = [
 const listSkillsRef = ref(null);
 
 const addLine = () => {
-  userStore.skills.push({ name: null, experienceTime: null });
+  userStore.info.skills.push({ name: null, experienceTime: null });
 
   setTimeout(() => {
     listSkillsRef.value.scrollTop = listSkillsRef.value.scrollHeight;
@@ -51,7 +51,7 @@ const addLine = () => {
 }
 
 const removeLine = (index) => {
-  userStore.skills.splice(index, 1);
+  userStore.info.skills.splice(index, 1);
 }
 </script>
 

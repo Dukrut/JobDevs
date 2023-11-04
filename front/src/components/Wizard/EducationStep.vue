@@ -4,20 +4,21 @@
 
     <div>
       <label>Instituição de ensino</label>
-      <q-input dense outlined v-model="userStore.educations.institutionName" label="Comente o nome da instituição" />
+      <q-input dense outlined v-model="userStore.info.educations[0].institutionName"
+        label="Comente o nome da instituição" />
     </div>
 
     <div style="display: flex; gap: 20px;">
       <div style="width: 50%;">
         <label for="english-level">Titulação</label>
-        <q-select dense outlined id="english-level" clearable v-model="userStore.educations.degree"
+        <q-select dense outlined id="english-level" clearable v-model="userStore.info.educations[0].degree"
           :options="degreeOptions" option-label="name" emit-value map-options style="width: 100%;"
           label="Selecione uma opção" />
       </div>
 
       <div style="width: 50%;">
         <label>Área de estudo</label>
-        <q-input style="width: 100%;" dense outlined v-model="userStore.educations.fieldStudy"
+        <q-input style="width: 100%;" dense outlined v-model="userStore.info.educations[0].fieldStudy"
           label="Digite uma área de estudo" />
       </div>
     </div>
@@ -25,7 +26,7 @@
     <div style="display: flex; gap: 20px;">
       <div>
         <label>Ano de ínicio</label>
-        <q-input dense outlined v-model="userStore.educations.startDate" mask="####" fill-mask>
+        <q-input dense outlined v-model="userStore.info.educations[0].startDate" mask="####" fill-mask>
           <template v-slot:append>
             <q-icon name="event" />
           </template>
@@ -34,7 +35,7 @@
 
       <div>
         <label>Ano de término</label>
-        <q-input dense outlined v-model="userStore.educations.endDate" mask="####" fill-mask>
+        <q-input dense outlined v-model="userStore.info.educations[0].endDate" mask="####" fill-mask>
           <template v-slot:append>
             <q-icon name="event" />
           </template>
@@ -44,12 +45,12 @@
 
     <div>
       <label>Descrição</label>
-      <q-input v-model="userStore.educations.description" outlined type="textarea" />
+      <q-input v-model="userStore.info.educations[0].description" outlined type="textarea" />
     </div>
 
     <div>
       <label>Quais as atividades que você exerceu durante o curso?</label>
-      <q-input v-model="userStore.educations.activities" outlined type="textarea" />
+      <q-input v-model="userStore.info.educations[0].activities" outlined type="textarea" />
     </div>
   </div>
 </template>

@@ -32,8 +32,14 @@
 <script setup>
 import { ref } from "vue";
 import { useUserStore } from "src/stores/user-store";
+import { useQuasar } from "quasar";
+import { useAuthStore } from "../../stores/auth-store";
+import register from "src/services/userService";
+import login from "../../services/authService";
 
+const authStore = useAuthStore();
 const userStore = useUserStore();
+const $q = useQuasar();
 
 import LanguageStep from "./LanguageStep.vue"
 import SkillStep from "./SkillStep.vue";
@@ -44,8 +50,37 @@ const step = ref(1);
 
 const finishProfileRegister = () => {
   console.log(userStore);
+
+  register(userStore.info)
+    .then((response) => {
+      if (response.status === 200)
+        authUser();
+    })
+    .catch((error) => {
+      $q.notify({
+        icon: "warning",
+        color: "negative",
+        message: "Não foi possível cadastrar o usuário!"
+      });
+    });
 }
 
+const authUser = () => {
+  login({ email: userStore.info.email, password: userStore.info.password })
+    .then((response) => {
+      if (response.data.info) {
+        authStore.setJWt(response.data.info);
+        console.log("deu certo");
+      }
+    })
+    .catch((error) => {
+      $q.notify({
+        icon: "warning",
+        color: "negative",
+        message: "Credenciais inválidas!",
+      });
+    });
+};
 </script>
 
 <style lang="scss" scoped></style>
