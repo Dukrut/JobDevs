@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
@@ -60,6 +61,8 @@ public class SecurityConfiguration {
                                         HttpMethod.POST,
                                         "/api/auth/login", "/api/users", "/api/users/wizard"
                                 )
+                                .permitAll()
+                                .requestMatchers(HttpMethod.GET, "/api/languages/options")
                                 .permitAll()
                                 .anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider())
