@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `skills` (
 
 CREATE TABLE IF NOT EXISTS `user_languages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `english_proficiency` enum('BEGINNER','INTERMEDIARY','ADVANCED') DEFAULT NULL,
+  `english_proficiency` enum('BEGINNER','INTERMEDIARY','ADVANCED', 'FLUENT') DEFAULT NULL,
   `worked_with_english` TINYINT(1) DEFAULT 0,
   `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),

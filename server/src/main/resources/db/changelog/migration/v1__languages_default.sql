@@ -1,1 +1,1 @@
-INSERT INTO jobdev.`language` (id, name) VALUES(1, "PT-BR"), (2, "EN"), (4, "FR"), (3, "ES"), (5, "AL"), (6, "FR"), (7, "IT");
+INSERT INTO jobdev.`language` (id, name) VALUES(1, "Português"), (2, "Inglês"), (4, "Francês"), (3, "Espanhol"), (5, "Alemão"), (6, "Chinês"), (7, "Italiano");
