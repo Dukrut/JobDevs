@@ -10,6 +10,9 @@ import tcc.job.devs.enums.ContractPreference;
 import tcc.job.devs.enums.Gender;
 import tcc.job.devs.enums.JobPreference;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ProfilePayloads {
 
     @Data
@@ -21,8 +24,8 @@ public class ProfilePayloads {
         private String lastRole;
         private String lastCompany;
         @NotNull
-        private JobPreference jobPreference;
-        private ContractPreference contractPreference;
+        private Set<JobPreference> jobPreference = new HashSet<>();
+        private Set<ContractPreference> contractPreference = new HashSet<>();
     }
 
     @EqualsAndHashCode(callSuper = true)
