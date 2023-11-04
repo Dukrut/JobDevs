@@ -15,14 +15,17 @@ import tcc.job.devs.enums.ExperienceTime;
 public class SkillEntity extends EntityBase {
 
     @Column(name = "name", nullable = false, columnDefinition = "TEXT")
+    @EqualsAndHashCode.Include
     private String name;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "experience_time")
+    @EqualsAndHashCode.Include
     private ExperienceTime experienceTime;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
     @NotNull
+    @ToString.Exclude
     private UserEntity user;
 }

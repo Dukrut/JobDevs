@@ -6,7 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import tcc.job.devs.enums.Proficiency;
 
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true)
 @Table(name = "user_languages_has_skills")
 @Entity
 @Data

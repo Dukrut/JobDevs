@@ -24,6 +24,7 @@ public class UserLanguagePayloads {
     public static class UserLanguageSkillPayload {
         @EqualsAndHashCode.Include
         private int id;
+        @EqualsAndHashCode.Include
         private Proficiency proficiency;
         @EqualsAndHashCode.Include
         private int languageId;

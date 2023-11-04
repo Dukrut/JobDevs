@@ -58,7 +58,7 @@ public class SecurityConfiguration {
                         managerRequests
                                 .requestMatchers(
                                         HttpMethod.POST,
-                                        "/api/auth/login", "/api/users"
+                                        "/api/auth/login", "/api/users", "/api/users/wizard"
                                 )
                                 .permitAll()
                                 .anyRequest().authenticated())

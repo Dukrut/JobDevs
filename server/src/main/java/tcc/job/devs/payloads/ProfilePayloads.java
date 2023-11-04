@@ -20,7 +20,6 @@ public class ProfilePayloads {
         private String hobbies;
         private String lastRole;
         private String lastCompany;
-        private Boolean student;
         @NotNull
         private JobPreference jobPreference;
         private ContractPreference contractPreference;

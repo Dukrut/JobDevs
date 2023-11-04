@@ -23,8 +23,9 @@ public class UserLanguageEntity extends EntityBase {
     @Column(name = "english_proficiency", nullable = false)
     private Proficiency englishProficiency;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
+    @ToString.Exclude
     private UserEntity user;
 
     @OneToMany(mappedBy = "userLanguage", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

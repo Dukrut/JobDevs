@@ -18,13 +18,13 @@ public class EducationPayloads {
         private String fieldStudy;
         private Date startDate;
         private Date endDate;
-        private String grade;
         private String description;
         @EqualsAndHashCode.Include
         private String activities;
     }
 
     @Data
+    @EqualsAndHashCode
     public static class UpdateUserEducationPayload {
 
         @NotNull
@@ -42,7 +42,6 @@ public class EducationPayloads {
         private String fieldStudy;
         private Date startDate;
         private Date endDate;
-        private String grade;
         private String description;
         private String activities;
     }

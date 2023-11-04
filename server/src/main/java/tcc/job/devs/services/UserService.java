@@ -3,8 +3,13 @@ package tcc.job.devs.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import tcc.job.devs.entities.LanguageEntity;
 import tcc.job.devs.entities.UserEntity;
+import tcc.job.devs.entities.UserLanguageEntity;
+import tcc.job.devs.entities.UserLanguageSkillEntity;
+import tcc.job.devs.mappers.UserLanguageMapper;
 import tcc.job.devs.mappers.UserMapper;
+import tcc.job.devs.payloads.UserLanguagePayloads;
 import tcc.job.devs.payloads.UserPayloads;
 import tcc.job.devs.repositories.UserRepositoryImpl;
 
@@ -15,6 +20,9 @@ public class UserService {
 
     @Autowired
     private UserRepositoryImpl userRepository;
+
+    @Autowired
+    private LanguageService languageService;
 
     @Autowired
     private PasswordEncoder encoder;
@@ -41,6 +49,34 @@ public class UserService {
         UserMapper.INSTANCE.updateEntityFromPayload(updateUserPayload, user);
         userRepository.save(user);
         return UserMapper.INSTANCE.toModel(user);
+    }
+
+    public UserPayloads.UserModel handleWizard(UserPayloads.UserWizard userWizard) {
+
+        userWizard.setPassword(handlePassword(userWizard.getPassword()));
+        UserEntity user = UserMapper.INSTANCE.toEntity(userWizard);
+
+        // iDIOMAS
+        UserLanguageEntity userLanguage = UserLanguageMapper.INSTANCE.toEntity(userWizard.getLanguage());
+        userLanguage.setUser(user);
+        userLanguage.getLanguageSkills().clear();
+        for (UserLanguagePayloads.UserLanguageSkillPayload userLanguageSkillPayload : userWizard.getLanguage().getLanguageSkills()) {
+            UserLanguageSkillEntity userLanguageSkillEntity = new UserLanguageSkillEntity();
+            userLanguageSkillEntity.setUserLanguage(userLanguage);
+            userLanguageSkillEntity.setProficiency(userLanguageSkillPayload.getProficiency());
+            LanguageEntity languageEntity = languageService.getEntityById(userLanguageSkillPayload.getLanguageId());
+            userLanguageSkillEntity.setLanguage(languageEntity);
+            userLanguage.getLanguageSkills().add(userLanguageSkillEntity);
+        }
+
+        user.setLanguage(userLanguage);
+        user.getProfile().setUser(user);
+        user.getSkills().forEach(skillEntity -> skillEntity.setUser(user));
+        user.getEducations().forEach(educationEntity -> educationEntity.setUser(user));
+
+        userRepository.save(user);
+        return UserMapper.INSTANCE.toModel(user);
+
     }
 
     public void deleteById(int id) {

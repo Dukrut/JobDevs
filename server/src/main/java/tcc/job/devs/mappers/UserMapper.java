@@ -1,6 +1,7 @@
 package tcc.job.devs.mappers;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.factory.Mappers;
 import tcc.job.devs.entities.UserEntity;
@@ -14,6 +15,9 @@ public interface UserMapper {
     UserPayloads.UserModel toModel(UserEntity entity);
 
     UserEntity toEntity(UserPayloads.CreateUserPayload createUserPayload);
+
+    @Mapping(target = "language", ignore = true)
+    UserEntity toEntity(UserPayloads.UserWizard userWizard);
 
     UserEntity toEntity(UserPayloads.UpdateUserPayload updateUserPayload);
 

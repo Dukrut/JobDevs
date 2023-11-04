@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tcc.job.devs.payloads.UserPayloads;
@@ -63,5 +65,17 @@ public class UserResourceImpl implements BaseResource<UserPayloads.UserModel, Us
             return response(HttpStatus.BAD_REQUEST);
         }
 
+    }
+
+    @PostMapping("/wizard")
+    public ResponseEntity<?> wizard(@RequestBody UserPayloads.UserWizard userWizard) {
+
+        try {
+            UserPayloads.UserModel userModel = userService.handleWizard(userWizard);
+            return response(userModel, HttpStatus.OK);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return response(HttpStatus.BAD_REQUEST);
+        }
     }
 }

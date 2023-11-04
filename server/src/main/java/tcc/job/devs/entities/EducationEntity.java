@@ -31,9 +31,6 @@ public class EducationEntity extends EntityBase {
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @Column(name = "grade", length = 100)
-    private String grade;
-
     @Column(name = "description", length = 255)
     private String description;
 
@@ -42,5 +39,6 @@ public class EducationEntity extends EntityBase {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
     private UserEntity user;
 }

@@ -32,9 +32,6 @@ public class ProfileEntity extends EntityBase {
     @Column(name = "last_company")
     private String lastCompany;
 
-    @Column(name = "student")
-    private Boolean student;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "job_preference", nullable = false)
     private JobPreference jobPreference;
@@ -46,5 +43,6 @@ public class ProfileEntity extends EntityBase {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id", updatable = false)
     @NotNull
+    @ToString.Exclude
     private UserEntity user;
 }
