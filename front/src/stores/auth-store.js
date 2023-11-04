@@ -13,7 +13,7 @@ export const useAuthStore = defineStore("auth", {
     setJWt(jwt) {
       this.jwt = jwt;
 
-      const info = this.decodeJWT(this.jwt);
+      const info = this.decodeJWT(jwt);
 
       this.user = {
         id: info.id,
