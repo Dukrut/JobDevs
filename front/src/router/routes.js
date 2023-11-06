@@ -1,31 +1,24 @@
 const routes = [
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/MainLayout.vue'),
-  //   children: [
-  //     { path: '', component: () => import('pages/IndexPage.vue') }
-  //   ]
-  // },
-  { 
+  {
     path: "/",
     component: () => import("pages/HomePage.vue"),
-
+    meta: { requiresAuth: true },
   },
   {
     path: "/login",
     component: () => import("pages/LoginPage.vue"),
+    meta: { guestOnly: true },
   },
   {
     path: "/register",
     component: () => import("pages/RegisterPage.vue"),
+    meta: { guestOnly: true },
   },
   {
     path: "/register/wizard",
     component: () => import("pages/WizardPage.vue"),
+    meta: { guestOnly: true },
   },
-
-  // Always leave this as last one,
-  // but you can also remove it
   {
     path: "/:catchAll(.*)*",
     component: () => import("pages/ErrorNotFound.vue"),
