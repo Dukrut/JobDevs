@@ -38,9 +38,11 @@ import { ref } from "vue";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "../../stores/auth-store";
 import login from "../../services/authService";
+import { useRouter } from "vue-router";
 
 const $q = useQuasar();
 const authStore = useAuthStore();
+const router = useRouter();
 
 const form = ref({
   email: null,
@@ -55,6 +57,7 @@ const onSubmit = () => {
       .then((response) => {
         if (response.data.info) {
           authStore.setJWt(response.data.info);
+          router.push("/")
         }
       })
       .catch((error) => {
