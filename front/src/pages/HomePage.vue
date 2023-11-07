@@ -13,7 +13,7 @@
 
   <div>
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-btn push color="white" text-color="primary" label="Buscar por vagas" no-caps />
+      <q-btn push color="white" text-color="primary" label="Buscar por vagas" no-caps @click="onSearchForJobs()" />
     </div>
 
     <q-separator inset />
@@ -46,103 +46,20 @@
 
 <script setup>
 import { useAuthStore } from 'src/stores/auth-store';
+import searchJobs from 'src/services/jobService';
 import { ref } from 'vue';
 
 const authStore = useAuthStore();
-const jobList = [
-  {
-    "companyId": 40133,
-    "name": "Desenvolvedor Java Sr",
-    "description": "1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Responsabilidades e atribui\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Requisitos e qualifica\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.",
-    "careerPageId": 140986,
-    "careerPageName": "Account Manager Jr",
-    "careerPageLogo": "",
-    "type": "vacancy_legal_entity",
-    "publishedDate": "2023-06-21T14:47:38.135Z",
-    "applicationDeadline": null,
-    "isRemoteWork": true,
-    "city": "S\u00e3o Paulo",
-    "state": "S\u00e3o Paulo",
-    "country": "Brasil",
-    "jobUrl": "https://taking&140986&inactive.gupy.io/job/eyJqb2JJZCI6NTAzMzk0MCwic291cmNlIjoiZ3VweV9wb3J0YWwifQ==?jobBoardSource=gupy_portal",
-    "badges": {
-      "friendlyBadge": false
-    },
-    "disabilities": true,
-    "workplaceType": "remote",
-    "careerPageUrl": "",
-    "similarity_score": 0
-  },
-  {
-    "companyId": 40133,
-    "name": "Desenvolvedor Java Sr",
-    "description": "1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Responsabilidades e atribui\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Requisitos e qualifica\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.",
-    "careerPageId": 140986,
-    "careerPageName": "Account Manager Jr",
-    "careerPageLogo": "",
-    "type": "vacancy_legal_entity",
-    "publishedDate": "2023-06-21T14:47:38.135Z",
-    "applicationDeadline": null,
-    "isRemoteWork": true,
-    "city": "S\u00e3o Paulo",
-    "state": "S\u00e3o Paulo",
-    "country": "Brasil",
-    "jobUrl": "https://taking&140986&inactive.gupy.io/job/eyJqb2JJZCI6NTAzMzk0MCwic291cmNlIjoiZ3VweV9wb3J0YWwifQ==?jobBoardSource=gupy_portal",
-    "badges": {
-      "friendlyBadge": false
-    },
-    "disabilities": true,
-    "workplaceType": "remote",
-    "careerPageUrl": "",
-    "similarity_score": 0
-  },
-  {
-    "companyId": 40133,
-    "name": "Desenvolvedor Java Sr",
-    "description": "1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Responsabilidades e atribui\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Requisitos e qualifica\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.",
-    "careerPageId": 140986,
-    "careerPageName": "Account Manager Jr",
-    "careerPageLogo": "",
-    "type": "vacancy_legal_entity",
-    "publishedDate": "2023-06-21T14:47:38.135Z",
-    "applicationDeadline": null,
-    "isRemoteWork": true,
-    "city": "S\u00e3o Paulo",
-    "state": "S\u00e3o Paulo",
-    "country": "Brasil",
-    "jobUrl": "https://taking&140986&inactive.gupy.io/job/eyJqb2JJZCI6NTAzMzk0MCwic291cmNlIjoiZ3VweV9wb3J0YWwifQ==?jobBoardSource=gupy_portal",
-    "badges": {
-      "friendlyBadge": false
-    },
-    "disabilities": true,
-    "workplaceType": "remote",
-    "careerPageUrl": "",
-    "similarity_score": 0
-  },
-  {
-    "companyId": 40133,
-    "name": "Desenvolvedor Java Sr",
-    "description": "1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Responsabilidades e atribui\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.Requisitos e qualifica\u00e7\u00f5es1. Experi\u00eancia comprovada em desenvolvimento de software utilizando Java Spring Boot, SQL Server e Bitbucket.2. Conhecimento desej\u00e1vel em Progress, PostgreSQL, MongoDB e Angular.3. Familiaridade com pr\u00e1ticas de desenvolvimento \u00e1gil e metodologias de gerenciamento de projetos.4. Habilidades s\u00f3lidas de resolu\u00e7\u00e3o de problemas e depura\u00e7\u00e3o de c\u00f3digo.5. Capacidade de trabalhar em equipe, comunicar-se efetivamente e colaborar em projetos conjuntos.6. Boas habilidades de organiza\u00e7\u00e3o e autogerenciamento.7. Forte interesse em aprender novas tecnologias e se manter atualizado com as tend\u00eancias do setor.",
-    "careerPageId": 140986,
-    "careerPageName": "Account Manager Jr",
-    "careerPageLogo": "",
-    "type": "vacancy_legal_entity",
-    "publishedDate": "2023-06-21T14:47:38.135Z",
-    "applicationDeadline": null,
-    "isRemoteWork": true,
-    "city": "S\u00e3o Paulo",
-    "state": "S\u00e3o Paulo",
-    "country": "Brasil",
-    "jobUrl": "https://taking&140986&inactive.gupy.io/job/eyJqb2JJZCI6NTAzMzk0MCwic291cmNlIjoiZ3VweV9wb3J0YWwifQ==?jobBoardSource=gupy_portal",
-    "badges": {
-      "friendlyBadge": false
-    },
-    "disabilities": true,
-    "workplaceType": "remote",
-    "careerPageUrl": "",
-    "similarity_score": 0
-  },
-]
+const jobList = ref([])
+
+const onSearchForJobs = () => {
+  searchJobs().then((response) => {
+    if (response.status === 200)
+      jobList.value = response.data.info
+  }).catch((err) => {
+    console.log("err", err)
+  });
+}
 
 </script>
 
