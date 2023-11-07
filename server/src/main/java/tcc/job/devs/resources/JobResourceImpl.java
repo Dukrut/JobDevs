@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import tcc.job.devs.services.JobService;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+
 @RestController
-@RequestMapping(value = "/api/job")
+@RequestMapping(value = "/api/jobs")
 public class JobResourceImpl implements IResponseResource{
 
     @Autowired
@@ -17,8 +21,13 @@ public class JobResourceImpl implements IResponseResource{
 
     @GetMapping("/search")
     public ResponseEntity<?> searchJobs() {
-        jobService.searchJobForUser();
-        return response(HttpStatus.OK);
+        try {
+            List<Map<String, Object>> jobs = jobService.searchJobForUser();
+            return response(jobs, HttpStatus.OK);
+        } catch (IOException | InterruptedException e) {
+            System.out.println(e.getMessage());
+            return response(HttpStatus.BAD_REQUEST);
+        }
     }
 
 }

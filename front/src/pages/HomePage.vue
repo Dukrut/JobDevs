@@ -13,7 +13,7 @@
 
   <div>
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-btn push color="white" text-color="primary" label="Buscar por vagas" no-caps />
+      <q-btn push color="white" text-color="primary" label="Buscar por vagas" no-caps @click="onSearchForJobs()"/>
     </div>
 
     <q-separator inset />
@@ -55,8 +55,20 @@
 <script setup>
 
 import { useAuthStore } from 'src/stores/auth-store';
+import searchJobs from 'src/services/jobService';
+import { ref } from 'vue';
 
 const authStore = useAuthStore();
+const jobList = ref([])
+
+const onSearchForJobs = () => {
+  searchJobs().then((response) => {
+    if (response.status === 200)
+      jobList.value = response.data.info
+  }).catch((err) => {
+    console.log("err", err)
+  });
+}
 
 </script>
 
