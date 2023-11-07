@@ -37,6 +37,7 @@ import { useAuthStore } from "../../stores/auth-store";
 import register from "src/services/userService";
 import login from "../../services/authService";
 
+const router = useRouter();
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const $q = useQuasar();
@@ -45,16 +46,18 @@ import LanguageStep from "./LanguageStep.vue"
 import SkillStep from "./SkillStep.vue";
 import ProfileStep from "./ProfileStep.vue";
 import EducationStep from "./EducationStep.vue";
+import { useRouter } from "vue-router";
 
 const step = ref(1);
 
 const finishProfileRegister = () => {
-  console.log(userStore);
 
   register(userStore.info)
     .then((response) => {
-      if (response.status === 200)
+      if (response.status === 200) {
         authUser();
+        router.push("/")
+      }
     })
     .catch((error) => {
       $q.notify({

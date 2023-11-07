@@ -51,14 +51,16 @@ import { ref } from 'vue';
 
 const authStore = useAuthStore();
 const jobList = ref([])
+const loading = ref(false)
 
 const onSearchForJobs = () => {
+  loading.value = true;
   searchJobs().then((response) => {
     if (response.status === 200)
       jobList.value = response.data.info
   }).catch((err) => {
     console.log("err", err)
-  });
+  }).finally(() => loading.value = false);
 }
 
 </script>
