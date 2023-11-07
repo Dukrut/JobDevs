@@ -1,5 +1,6 @@
 package tcc.job.devs.services;
 
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class JobService {
 
         // Convertendo o userModel para JSON
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
+
         String userModelJson = objectMapper.writeValueAsString(userModel);
 
         // Carrega o recurso do diretório resources
