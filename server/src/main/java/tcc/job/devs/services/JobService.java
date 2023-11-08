@@ -38,7 +38,6 @@ public class JobService {
         objectMapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
 
         String userModelJson = objectMapper.writeValueAsString(userModel);
-
         // Carrega o recurso do diretório resources
         Resource resource = new ClassPathResource("ia/job.py");
         Path tempFile = Files.createTempFile("job-", ".py");
@@ -58,6 +57,8 @@ public class JobService {
         while ((line = reader.readLine()) != null) {
             output = output.concat(line);
         }
+
+        output = "[" +  output.substring(output.indexOf("{"));
         List<Map<String, Object>> jobs = objectMapper.readValue(output, new TypeReference<List<Map<String, Object>>>(){});
 
         // Aguarda o processo terminar
