@@ -3,7 +3,7 @@ import argparse
 import requests
 import json
 import openai
-openai.api_key = "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"
+openai.api_key = "API_KEY"
 
 
 def format_place(place_enum):
@@ -88,12 +88,14 @@ def get_gpt3_similarity(text1, text2):
     }
 
     try:
-        response = openai.ChatCompletion.create(
+        response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=prompt['messages']
         )
-        content_str = response['choices'][0]['message']['content']
-        match = re.search(r'Rating: (\d+.\d+)', content_str)
+
+        # A resposta agora é um objeto e você pode precisar acessar os dados assim:
+        content_str = response.choices[0].message.content
+        match = re.search(r'Rating: (\d+\.\d+)', content_str)
         if match:
             relevance_score = float(match.group(1))
             return relevance_score
@@ -101,7 +103,6 @@ def get_gpt3_similarity(text1, text2):
             return 0
     except Exception as e:
         return 0
-
 
 def search_jobs_synonyms(user_profile):
     user_skills = ",".join(["{}".format(skill['name'])

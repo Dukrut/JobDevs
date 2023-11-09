@@ -13,12 +13,15 @@
 
   <div>
     <div class="q-pa-md row items-start q-gutter-md">
-      <q-btn push color="white" text-color="primary" label="Buscar por vagas" no-caps @click="onSearchForJobs()" />
+      <q-btn push color="white" text-color="primary" :disable="loading" label="Buscar por vagas" no-caps @click="onSearchForJobs()" />
     </div>
 
     <q-separator inset />
 
-    <div class="q-pa-md row items-start q-gutter-md" style="display: flex; justify-content: center; align-items: center;">
+    <div v-if="loading">
+      <LoadingComponent></LoadingComponent>
+    </div>
+    <div class="q-pa-md row items-start q-gutter-md" style="display: flex; justify-content: center; align-items: center;" v-else>
       <q-card class="my-card" flat bordered v-for="job, key in jobList" :key="key">
         <q-card-section horizontal>
           <q-card-section class="q-pt-xs">
@@ -49,7 +52,7 @@
               <div v-if="job.city">Cidade: {{ job.city }}</div>
             </div>
             <div class="text-caption text-grey description">
-              <p v-html="job.description"></p>
+              <div v-html="job.description"></div>
             </div>
           </q-card-section>
         </q-card-section>
@@ -70,6 +73,7 @@
 import { useAuthStore } from 'src/stores/auth-store';
 import searchJobs from 'src/services/jobService';
 import { ref } from 'vue';
+import LoadingComponent from 'src/components/LoadingComponent.vue';
 
 const authStore = useAuthStore();
 const jobList = ref([])
