@@ -50,4 +50,5 @@ public class ProfileEntity extends EntityBase {
     @NotNull
     @ToString.Exclude
     private UserEntity user;
+
 }

@@ -73,7 +73,6 @@ const authUser = () => {
     .then((response) => {
       if (response.data.info) {
         authStore.setJWt(response.data.info);
-        console.log("deu certo");
       }
     })
     .catch((error) => {

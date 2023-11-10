@@ -26,6 +26,15 @@ export const useAuthStore = defineStore("auth", {
       return this.jwt;
     },
 
+    clear() {
+      this.jwt = null;
+      this.user = {
+        id: null,
+        email: null,
+        name: null,
+      }
+    },
+
     decodeJWT(jwt) {
       const base64Url = jwt.split(".")[1];
       const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
