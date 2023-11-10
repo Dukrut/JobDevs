@@ -3,29 +3,27 @@ import argparse
 import requests
 import json
 import openai
-openai.api_key = "API_KEY"
+openai.api_key = "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"
 
 
-def format_place(place_enum):
-    return place_enum
-#     job_place = {
-#         "PRESENTIAL": "on-site",
-#         "HOME_OFFICE": "remote",
-#         "HYBRID": "hybrid"
-#     }
-#
-#     return job_place[place_enum]
+def format_place(places):
+    job_place = {
+        "PRESENTIAL": "on-site",
+        "HOME_OFFICE": "remote",
+        "HYBRID": "hybrid"
+    }
+
+    return ','.join([job_place.get(place, "unknown") for place in places])
 
 
-def format_contract_preference(contract_enum):
-    return contract_enum
-#     contract_preference = {
-#         "FREELANCE": "vacancy_type_freelancer",
-#         "CLT": "vacancy_type_effective",
-#         "PJ": "vacancy_legal_entity"
-#     }
-#
-#     return contract_preference[contract_enum]
+def format_contract_preference(contracts):
+    contract_preference = {
+        "FREELANCE": "vacancy_type_freelancer",
+        "CLT": "vacancy_type_effective",
+        "PJ": "vacancy_legal_entity"
+    }
+
+    return ','.join([contract_preference.get(contract, "unknown") for contract in contracts])
 
 
 def format_gender(gender_enum):
@@ -122,8 +120,8 @@ def search_jobs_synonyms(user_profile):
         url = 'https://portal.api.gupy.io/api/v1/jobs'
         params = {
             'jobName': f"{synonym.lower().replace(' ', '%20')}",
-#             'type': f"{job_type}",
-#             "workplaceType": f"{job_place}",
+            'type': f"{job_type}",
+            "workplaceType": f"{job_place}",
             'limit': 5,
             'offset': 1
         }

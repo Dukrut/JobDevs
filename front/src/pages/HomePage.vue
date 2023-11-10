@@ -8,6 +8,7 @@
           <img src="https://cdn.quasar.dev/img/avatar.png">
         </q-avatar>
       </q-btn>
+      <q-btn class="q-ml-sm" round flat icon="logout" @click="onLogout()"></q-btn>
     </q-toolbar>
   </div>
 
@@ -74,19 +75,27 @@ import { useAuthStore } from 'src/stores/auth-store';
 import searchJobs from 'src/services/jobService';
 import { ref } from 'vue';
 import LoadingComponent from 'src/components/LoadingComponent.vue';
+import { useRoute, useRouter } from 'vue-router';
 
 const authStore = useAuthStore();
+const route = useRouter()
 const jobList = ref([])
 const loading = ref(false)
 
 const onSearchForJobs = () => {
   loading.value = true;
   searchJobs().then((response) => {
-    if (response.status === 200)
+    if (response.status === 200) {
       jobList.value = response.data.info
+      sortJobsByScore()
+    }
   }).catch((err) => {
     console.log("err", err)
   }).finally(() => loading.value = false);
+}
+
+const sortJobsByScore = () => {
+  joblist.value = jobList.value.sort((a, b) => b.job.similarity_score - a.job.similarity_score);
 }
 
 const getLabelWorkplaceTypeFormated = (code) => {
@@ -109,6 +118,11 @@ const getLabelJobTypeFormated = (code) => {
   }
 
   return jobType[code]
+}
+
+const onLogout = () => {
+  authStore.clear()
+  route.push("/login")
 }
 
 </script>
