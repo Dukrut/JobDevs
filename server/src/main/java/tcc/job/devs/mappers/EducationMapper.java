@@ -6,6 +6,8 @@ import org.mapstruct.factory.Mappers;
 import tcc.job.devs.entities.EducationEntity;
 import tcc.job.devs.payloads.EducationPayloads;
 
+import java.util.Set;
+
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface EducationMapper {
 
@@ -14,6 +16,7 @@ public interface EducationMapper {
     EducationPayloads.EducationModel toModel(EducationEntity entity);
 
     EducationEntity toEntity(EducationPayloads.EducationPayload educationPayload);
+    Set<EducationEntity> toEntitySet(Set<EducationPayloads.EducationPayload> educationPayload);
 
 
 }

@@ -3,7 +3,7 @@ import argparse
 import requests
 import json
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 
 def format_place(places):
@@ -107,7 +107,8 @@ def search_jobs_synonyms(user_profile):
                            for skill in user_profile['skills']])
     synonyms = [
         'desenvolvedor',
-        'programador',
+        'desenvolvimento',
+        'developer',
     ]
     synonyms = synonyms + user_skills.split(",")
     
@@ -122,7 +123,7 @@ def search_jobs_synonyms(user_profile):
             'jobName': f"{synonym.lower().replace(' ', '%20')}",
             'type': f"{job_type}",
             "workplaceType": f"{job_place}",
-            'limit': 5,
+            'limit': 30,
             'offset': 1
         }
 
@@ -138,7 +139,8 @@ def search_jobs_synonyms(user_profile):
     full_user_description = format_user_info(user_profile)
     for job in total_jobs:
         job_description = f"Título:{job['name']}\nDescrição: {job['description']}"
-        score = get_gpt3_similarity(full_user_description, job_description)
+#         score = get_gpt3_similarity(full_user_description, job_description)
+        score = 0
         job['similarity_score'] = score
 
     matching_jobs = sorted(

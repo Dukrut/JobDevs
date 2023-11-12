@@ -57,7 +57,7 @@ public class UserPayloads {
     @ToString(callSuper = true)
     @Data
     public static class UserWizard extends UserPayload {
-        @NotNull
+        private int id;
         private String password;
         private UserLanguagePayloads.CreateUserLanguagePayload language;
         private ProfilePayloads.CreateProfilePayload profile;

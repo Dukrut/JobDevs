@@ -1,7 +1,7 @@
-import api from "./apiAuth";
+import apiAuth from "./apiAuth";
 
 const searchJobs = async () => {
-  return await api.get("jobs/search");
+  return await apiAuth.get("jobs/search");
 };
 
 export default searchJobs;

@@ -21,7 +21,7 @@
       <template v-slot:navigation>
         <q-stepper-navigation>
           <q-btn @click="step === 4 ? finishProfileRegister() : $refs.stepper.next()" color="primary"
-            :label="step === 4 ? 'Buscar por vagas' : 'Seguir'" />
+            :label="step === 4 ? 'Buscar por vagas' : 'Seguir'" :disable="stepIsInvalid(step)"/>
           <q-btn v-if="step > 1" flat color="primary" @click="$refs.stepper.previous()" label="Voltar" class="q-ml-sm" />
         </q-stepper-navigation>
       </template>
@@ -83,6 +83,17 @@ const authUser = () => {
       });
     });
 };
+
+const stepIsInvalid = (step) => {
+  console.log(step)
+  if (step === 1) {
+    return !validateSkillStep()
+  }
+}
+
+const validateSkillStep = () => {
+  return userStore.info.skills.length > 0 && userStore.info.skills[0].experienceTime?.length > 0 && userStore.info.skills[0].name?.length > 0
+}
 </script>
 
 <style lang="scss" scoped></style>

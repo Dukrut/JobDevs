@@ -36,6 +36,7 @@ public class UserLanguagePayloads {
     public static class CreateUserLanguagePayload extends UserLanguagePayload {
         @NotNull
         private int userId;
+        private int id;
     }
 
     @EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)

@@ -1,15 +1,6 @@
 <template>
   <div>
-    <q-toolbar class="bg-primary text-white">
-      <q-toolbar-title>JobDevs</q-toolbar-title>
-
-      <q-btn flat round dense>
-        <q-avatar>
-          <img src="https://cdn.quasar.dev/img/avatar.png">
-        </q-avatar>
-      </q-btn>
-      <q-btn class="q-ml-sm" round flat icon="logout" @click="onLogout()"></q-btn>
-    </q-toolbar>
+    <ToolbarComponent></ToolbarComponent>
   </div>
 
   <div>
@@ -85,14 +76,11 @@
 </template>
 
 <script setup>
-import { useAuthStore } from 'src/stores/auth-store';
 import searchJobs from 'src/services/jobService';
 import { ref } from 'vue';
 import LoadingComponent from 'src/components/LoadingComponent.vue';
-import { useRoute, useRouter } from 'vue-router';
+import ToolbarComponent from 'src/components/ToolbarComponent.vue';
 
-const authStore = useAuthStore();
-const route = useRouter()
 const jobList = ref([])
 const loading = ref(false)
 
@@ -109,7 +97,7 @@ const onSearchForJobs = () => {
 }
 
 const sortJobsByScore = () => {
-  joblist.value = jobList.value.sort((a, b) => b.job.similarity_score - a.job.similarity_score);
+  jobList.value = jobList.value.sort((a, b) => b.job.similarity_score - a.job.similarity_score);
 }
 
 const getLabelWorkplaceTypeFormated = (code) => {
@@ -131,11 +119,6 @@ const getLabelJobTypeFormated = (code) => {
   }
 
   return jobType[code]
-}
-
-const onLogout = () => {
-  authStore.clear()
-  route.push("/login")
 }
 
 </script>

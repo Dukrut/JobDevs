@@ -3,7 +3,7 @@ import { useAuthStore } from "src/stores/auth-store";
 console.log("VUE_APP_BASE_API:", process.env.VUE_APP_BASE_API);
 
 const authStore = useAuthStore();
-const api = axios.create({
+const apiAuth = axios.create({
   baseURL: `${process.env.VUE_APP_BASE_API}/api/`, // Corrija a URL base aqui
   headers: {
     Authorization: `Bearer ${authStore.jwt}`,
@@ -15,4 +15,4 @@ const api = axios.create({
   },
 });
 
-export default api;
+export default apiAuth;

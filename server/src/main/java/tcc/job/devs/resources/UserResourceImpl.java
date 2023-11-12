@@ -15,7 +15,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping(value = "/api/users")
-public class UserResourceImpl implements BaseResource<UserPayloads.UserModel, UserPayloads.CreateUserPayload, UserPayloads.UpdateUserPayload> {
+public class UserResourceImpl implements BaseResource<UserPayloads.UserModel, UserPayloads.CreateUserPayload, UserPayloads.UserWizard> {
 
     @Autowired
     private UserService userService;
@@ -45,13 +45,14 @@ public class UserResourceImpl implements BaseResource<UserPayloads.UserModel, Us
     }
 
     @Override
-    public ResponseEntity<?> update(UserPayloads.UpdateUserPayload updateUserPayload) {
+    public ResponseEntity<?> update(UserPayloads.UserWizard updateUserPayload) {
         try {
             UserPayloads.UserModel model = userService.update(updateUserPayload);
             return response(model, HttpStatus.OK);
         } catch (NoSuchElementException ex) {
             return response(HttpStatus.NOT_FOUND);
         } catch (Exception ex) {
+            System.out.println(ex.getMessage());
             return response(HttpStatus.BAD_REQUEST);
         }
     }

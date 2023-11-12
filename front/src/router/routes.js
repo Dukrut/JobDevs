@@ -5,6 +5,11 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/profile",
+    component: () => import("pages/ProfilePage.vue"),
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/login",
     component: () => import("pages/LoginPage.vue"),
     meta: { guestOnly: true },

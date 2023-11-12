@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public interface BaseResource<TModel, TCreatePayload, TUpdatePayload> extends IResponseResource {
 
     @GetMapping("/{id}")
-    ResponseEntity<?> get(@PathVariable(name = "id", required = true) int id);
+    ResponseEntity<?> get(@PathVariable int id);
 
     @PostMapping
     ResponseEntity<?> create(@Valid @RequestBody(required = true) TCreatePayload payload);
