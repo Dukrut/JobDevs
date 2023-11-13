@@ -21,7 +21,7 @@
       <template v-slot:navigation>
         <q-stepper-navigation>
           <q-btn @click="step === 4 ? finishProfileRegister() : $refs.stepper.next()" color="primary"
-            :label="step === 4 ? 'Buscar por vagas' : 'Seguir'" :disable="stepIsInvalid(step)"/>
+            :label="step === 4 ? 'Buscar por vagas' : 'Seguir'" :disable="stepIsInvalid(step)" />
           <q-btn v-if="step > 1" flat color="primary" @click="$refs.stepper.previous()" label="Voltar" class="q-ml-sm" />
         </q-stepper-navigation>
       </template>
@@ -34,7 +34,7 @@ import { ref } from "vue";
 import { useUserStore } from "src/stores/user-store";
 import { useQuasar } from "quasar";
 import { useAuthStore } from "../../stores/auth-store";
-import register from "src/services/userService";
+import { register } from "src/services/userService";
 import login from "../../services/authService";
 
 const router = useRouter();
