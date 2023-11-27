@@ -33,23 +33,19 @@ public class JobService {
         int userId = jwtUtils.getUserIdFromJWT();
         UserPayloads.UserModel userModel = userService.findModelById(userId);
 
-        // Convertendo o userModel para JSON
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.configure(JsonParser.Feature.ALLOW_COMMENTS, true);
 
         String userModelJson = objectMapper.writeValueAsString(userModel);
-        // Carrega o recurso do diretório resources
         Resource resource = new ClassPathResource("ia/job.py");
         Path tempFile = Files.createTempFile("job-", ".py");
         try (InputStream inputStream = resource.getInputStream()) {
             Files.copy(inputStream, tempFile, StandardCopyOption.REPLACE_EXISTING);
         }
 
-        // Executa o script Python
         ProcessBuilder processBuilder = new ProcessBuilder("python3", tempFile.toString(), "--user_profile", userModelJson);
         processBuilder.redirectErrorStream(true);
 
-        // Inicia o processo e lê a saída
         Process process = processBuilder.start();
         BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
         String line;
@@ -61,13 +57,11 @@ public class JobService {
         output = "[" +  output.substring(output.indexOf("{"));
         List<Map<String, Object>> jobs = objectMapper.readValue(output, new TypeReference<List<Map<String, Object>>>(){});
 
-        // Aguarda o processo terminar
         int exitCode = process.waitFor();
         if (exitCode != 0) {
             throw new RuntimeException("O script Python falhou com o código de saída " + exitCode);
         }
 
-        // Certifique-se de excluir o arquivo temporário após o uso
         Files.deleteIfExists(tempFile);
 
         return jobs;
