@@ -3,7 +3,7 @@ import argparse
 import requests
 import json
 import openai
-openai.api_key = "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"
+openai.api_key = ""
 
 
 def format_place(places):
@@ -73,17 +73,27 @@ def format_user_info(user_profile):
     )
     return full_description
 
+def find_rating(content, keywords):
+    for keyword in keywords:
+        match = re.search(fr'{keyword}\s*([\d.]+)', content)
+        if match:
+            return float(match.group(1))
+    return 0
+
 
 def get_gpt3_similarity(text1, text2):
-    prompt = {
+    
+    prompt = prompt = {
         'messages': [
-            {'role': 'system', 'content': 'You are a helpful assistant.'},
             {
-                'role': 'user',
-                'content': f"You only need to return the rating on a scale of 0 to 1 in comparison to the vacancy profile and the person's profile.Take into account that we are dealing with a software developer vacancy, carefully analyze the skills, languages, experience, qualifications and requirements of the vacancy.\nPerson profile:{text1}\nVacancy profile:{text2}\nAnswer like this: Rating: rate_value\n"
+                'role': 'system',
+                'content': 'You are an AI assistant specialized in job matching. Your task is to analyze the compatibility between a software developer\'s profile and a job description. Focus on technical skills, experience level, and specific requirements mentioned in the job. Rate the compatibility on a scale of float 0 to 1. I want only number response like this Rating: [float_value]'
             }
         ]
     }
+    
+    user_message = f"Developer Profile: {text1} Job Description: {text2} Please analyze the above information and rate the compatibility. Remember to consider specific programming languages, back-end versus full-stack development experience, and any other technical requirements. Provide a rating on scale of 0 to 1. Response: Rating: [float_value]"
+    prompt['messages'].append({'role': 'user', 'content': user_message})
 
     try:
         response = openai.chat.completions.create(
@@ -91,24 +101,22 @@ def get_gpt3_similarity(text1, text2):
             messages=prompt['messages']
         )
 
-        # A resposta agora é um objeto e você pode precisar acessar os dados assim:
         content_str = response.choices[0].message.content
-        match = re.search(r'Rating: (\d+\.\d+)', content_str)
-        if match:
-            relevance_score = float(match.group(1))
-            return relevance_score
-        else:
-            return 0
+        rating_keywords = ["Rating:", "Avaliação:", "Classificação:"]
+        rating_value = find_rating(content_str, rating_keywords)
+        return rating_value
+
     except Exception as e:
         return 0
+
 
 def search_jobs_synonyms(user_profile):
     user_skills = ",".join(["{}".format(skill['name'])
                            for skill in user_profile['skills']])
     synonyms = [
         'desenvolvedor',
-        'desenvolvimento',
         'developer',
+        'software',
     ]
     synonyms = synonyms + user_skills.split(",")
     
@@ -123,7 +131,7 @@ def search_jobs_synonyms(user_profile):
             'jobName': f"{synonym.lower().replace(' ', '%20')}",
             'type': f"{job_type}",
             "workplaceType": f"{job_place}",
-            'limit': 30,
+            'limit': 5,
             'offset': 1
         }
 
@@ -139,9 +147,9 @@ def search_jobs_synonyms(user_profile):
     full_user_description = format_user_info(user_profile)
     for job in total_jobs:
         job_description = f"Título:{job['name']}\nDescrição: {job['description']}"
-#         score = get_gpt3_similarity(full_user_description, job_description)
-        score = 0
-        job['similarity_score'] = score
+
+        result = get_gpt3_similarity(full_user_description, job_description)
+        job['similarity_score'] = result
 
     matching_jobs = sorted(
         total_jobs, key=lambda x: x['similarity_score'], reverse=True)
